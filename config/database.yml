@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  database: band_tracker
+  #template: template0
+
+test:
+  adapter: postgresql
+  database: band_tracker_test
+  #template: template0
