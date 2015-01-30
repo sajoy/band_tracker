@@ -10,7 +10,7 @@ end
 
 # CRUD bands
 get('/bands') do
-  @bands = Band.all()
+  @bands = Band.all().order('name')
   erb(:bands)
 end
 
@@ -28,10 +28,13 @@ patch('/bands') do
   redirect back
 end
 
-# delete('/bands/:id') do
-#
-#   redirect back
-# end
+delete('/bands') do
+  band_id = params['band_id']
+  band = Band.find(band_id)
+  band.venues.destroy
+  band.destroy
+  redirect back
+end
 
 # Individual Band Page
 
