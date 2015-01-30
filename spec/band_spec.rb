@@ -13,5 +13,4 @@ describe(Band) do
     band1 = Band.create({:name => "the hash Rockets"})
     expect(band1.name()).to(eq("The Hash Rockets"))
   end
-
 end

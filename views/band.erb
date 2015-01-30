@@ -4,7 +4,7 @@
       <h1 class="big">I <3 <%= @band.name %> <h1>
       <h2>Venues I've seen them at:</h2>
         <% if @band.venues.any? %>
-          <% @band.venues.each do |venue| %>
+          <% @band.venues.uniq.each do |venue| %>
             <%= venue.name %></br>
           <% end %>
         <% else %>
@@ -31,12 +31,12 @@
       <h3>Delete a venue:</h3>
       <form action="/band/<%= @band.id %>" method="post">
         <input type="hidden" name="_method" value="delete">
-        <% @band.venues.each do |venue| %>
+        <% @band.venues.uniq.each do |venue| %>
           <input type="checkbox" name="venue_ids[]" value="<%= venue.id %>"><%= venue.name %><br>
         <% end %>
         <br>
         <button type="submit" class="btn btn-xs btn-danger">Delete Venue</button>
-
+        <br>
 
       </form>
 

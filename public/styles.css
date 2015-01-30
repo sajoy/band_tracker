@@ -22,7 +22,8 @@ h1, h2, h3 {font-family: 'Oswald', sans-serif;}
   background: #fff;
   padding: 15px;
   min-height: 400px;
-  max-height: 800px;
+  max-height: 400px;
+  overflow: auto;
 }
 
 .landing_link {
