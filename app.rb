@@ -51,11 +51,8 @@ patch('/band/:id') do
   if params['venue_ids'] != nil
     venue_ids = params['venue_ids']
     venue_ids.each do |v_id|
-      
       venue = Venue.find(v_id)
       band.venues << venue
-
-
     end
   end
   if params['new_venue_name'] != ""
