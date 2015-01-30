@@ -1,0 +1,22 @@
+body{
+  background-color: #f39;
+
+}
+
+.navbar {
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar a {color: #fff;}
+.navbar a:hover {color: #fff;}
+
+.box {
+  margin: 50px auto;
+  width: 100%;
+  background: #fff;
+  padding: 15px;
+}
+.col-md-6 {text-align: center; }
