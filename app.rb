@@ -54,12 +54,11 @@ patch('/band/:id') do
       venue = Venue.find(v_id)
       band.venues << venue
     end
-  else
+  end
+  if params['new_venue_name'] != nil
     name = params['new_venue_name']
     venue = Venue.create({:name => name})
-    if venue == true
-       band.venues << venue
-    end
+    band.venues << venue
   end
   redirect back
 end
