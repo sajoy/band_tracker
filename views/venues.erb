@@ -1,0 +1,52 @@
+<div class="col-md-6">
+  <div class="box">
+    <form action="/venues" method="post">
+      <h3>Add a venue:</h3>
+      <input type="text" name="venue_name">
+      <button type="submit" class="btn btn-xs btn-info">Add</button>
+    </form>
+    <hr>
+    <form action="/venues" method="post">
+      <h3>Edit a venue name:</h3></br>
+      <input type="hidden" name="_method" value="patch">
+      Old venue name:
+        <select name="venue_id">
+          <% @venues.each do |venue| %>
+            <option value="<%= venue.id %>"> <%= venue.name %> </option>
+          <% end %>
+        </select></br>
+      New venue name: <input type="text" name="new_name">
+      <button type="submit" class="btn btn-xs btn-success">Update</button>
+    </form>
+    <hr>
+    <form action="/venues" method="post">
+      <h3>Delete a venue:</h3>
+      <input type="hidden" name="_method" value="delete">
+      Select a venue to delete:
+        <select name="venue_id">
+          <% @venues.each do |venue| %>
+            <option value="<%= venue.id %>"> <%= venue.name %> </option>
+          <% end %>
+        </select></br>
+      <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+
+    </form>
+
+
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="box">
+    <h2>Your Venues</h2>
+      <% if @venues.any? %>
+        <% @venues.each do |venue| %>
+        <%= venue.name %></br>
+        <% end %>
+        <% else %>
+        You haven't added any venues yet!
+      <% end %>
+
+
+  </div>
+</div>

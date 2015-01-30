@@ -1,0 +1,45 @@
+<div class="col-md-6">
+  <div class="box">
+    <h1 class="big">I <3 <%= @band.name %> <h1>
+    <h2>Venues I've seen them at:</h2>
+      <% if @band.venues.any? %>
+        <% @band.venues.each do |venue| %>
+          <%= venue.name %></br>
+        <% end %>
+      <% else %>
+        NONE ):
+      <% end %>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="box">
+
+    <h3>Add an existing venue:</h3>
+    <form action="/band/<%= @band.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <% @venues.each do |venue| %>
+        <input type="checkbox" name="venue_ids[]" value="<%= venue.id %>"><%= venue.name %><br>
+      <% end %>
+      <h3>Add a new venue:</h3>
+      <input type="text" name="new_venue_name">
+      <br>
+      <button type="submit" class="btn btn-xs btn-success">Add Venue</button>
+    </form>
+    <hr>
+    <h3>Delete a venue:</h3>
+    <form action="/band/<%= @band.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <% @band.venues.each do |venue| %>
+        <input type="checkbox" name="venue_ids[]" value="<%= venue.id %>"><%= venue.name %><br>
+      <% end %>
+      <br><br>
+      <button type="submit" class="btn btn-xs btn-success">Delete Venue</button>
+
+
+    </form>
+
+
+
+  </div>
+</div>

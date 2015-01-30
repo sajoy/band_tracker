@@ -8,7 +8,7 @@ get('/') do
   erb(:index)
 end
 
-# CRUD bands
+# CRUD Bands
 get('/bands') do
   @bands = Band.all().order('name')
   erb(:bands)
@@ -41,14 +41,65 @@ end
 get('/band/:id') do
   band_id = params['id']
   @band = Band.find(band_id)
+  @venues = Venue.all().order('name')
   erb(:band)
 end
 
+patch('/band/:id') do
+  band_id = params['id']
+  band = Band.find(band_id)
+  if params['venue_ids'] != nil
+    venue_ids = params['venue_ids']
+    venue_ids.each do |v_id|
+      venue = Venue.find(v_id)
+      band.venues << venue
+    end
+  else
+    name = params['new_venue_name']
+    venue = Venue.create({:name => name})
+    if venue == true
+       band.venues << venue
+    end
+  end
+  redirect back
+end
 
+delete('/band/:id') do
+  band_id = params['id']
+  band = Band.find(band_id)
+  venue_ids = params['venue_ids']
+  venue_ids.each do |v_id|
+    venue = Venue.find(v_id)
+    band.venues.delete(venue)
+  end
+  redirect back
+end
 
-#CRUD venues
+#CRUD Venues
 
-# get('/venues') do
-#
-#   erb(:venues)
-# end
+get('/venues') do
+  @venues = Venue.all.order('name')
+  erb(:venues)
+end
+
+post('/venues') do
+  name = params['venue_name']
+  Venue.create({:name => name})
+  redirect back
+end
+
+patch('/venues') do
+  venue_id = params['venue_id']
+  venue = Venue.find(venue_id)
+  new_name = params['new_name']
+  venue.update({:name => new_name})
+  redirect back
+end
+
+delete('/venues') do
+  venue_id = params['venue_id']
+  venue = Venue.find(venue_id)
+  venue.bands.destroy
+  venue.destroy
+  redirect back
+end
